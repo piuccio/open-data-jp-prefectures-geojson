@@ -4,7 +4,8 @@
   "description": "GeoJSON of Japanese prefectures",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest --coverage",
+    "test:watch": "jest --watchAll",
     "lint": "eslint --ignore-path .gitignore --cache --fix ."
   },
   "keywords": [],
@@ -12,11 +13,19 @@
   "license": "MIT",
   "devDependencies": {
     "eslint": "5.15.3",
+    "jest": "24.5.0",
     "mapshaper": "0.4.108"
   },
   "nodemonConfig": {
     "ignore": [
       "output/*"
     ]
+  },
+  "jest": {
+    "testEnvironment": "node"
+  },
+  "dependencies": {
+    "@turf/boolean-point-in-polygon": "6.0.1",
+    "@turf/helpers": "6.1.4"
   }
 }
