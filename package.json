@@ -1,6 +1,6 @@
 {
   "name": "open-data-jp-prefectures-geojson",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "GeoJSON of Japanese prefectures",
   "main": "index.js",
   "scripts": {
