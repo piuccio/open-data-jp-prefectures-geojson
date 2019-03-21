@@ -11,6 +11,10 @@
   },
   "keywords": [],
   "author": "Fabio Crisci <fabio.crisci@gmail.com> (https://github.com/piuccio)",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:piuccio/open-data-jp-prefectures-geojson.git"
+  },
   "license": "MIT",
   "devDependencies": {
     "eslint": "5.15.3",
