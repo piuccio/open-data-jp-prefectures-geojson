@@ -1,6 +1,7 @@
 const { readInput } = require('./lib/input');
-const { polygon, multiPolygon } = require('@turf/helpers');
+const { point, polygon, multiPolygon } = require('@turf/helpers');
 const booleanPointInPolygon = require('@turf/boolean-point-in-polygon').default;
+const lineIntersect = require('@turf/line-intersect').default;
 const { prefectureCode } = require('./lib/prefectures');
 
 let PREFECTURES = null;
@@ -30,5 +31,14 @@ function hackyContains(outside, inside) {
         // PointInPolygon works with MultiPolygons, Contains is broken
         return booleanPointInPolygon(inside.geometry, outside);
     }
-    throw new Error('not implemented');
+    // booleanContains is broken on MultiPolygons, first check the edges in the line
+    if (inside.geometry.type === 'LineString') {
+        const found = inside.geometry.coordinates.reduce((found, coordinates) => {
+            return found || booleanPointInPolygon(point(coordinates), outside);
+        }, false);
+        if (found) return found;
+        // There's still a chance the line intersects the outside polygon
+        return lineIntersect(outside, inside).features.length > 0;
+    }
+    throw new Error(`Geometry ${inside.geometry.type} is not supported`);
 }
