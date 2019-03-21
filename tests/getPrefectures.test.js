@@ -14,10 +14,16 @@ it('computes the prefecture of a single point, fully contained', async () => {
     expect(await getPrefectures(point(SHINJUKU))).toEqual([TOKYO]);
     expect(await getPrefectures(point(YOYOGI))).toEqual([TOKYO]);
     expect(await getPrefectures(point(CHICHIBU))).toEqual([SAITAMA]);
+
+    // Works with geometries as well as points
+    expect(await getPrefectures(point(SHINJUKU).geometry)).toEqual([TOKYO]);
 });
 
 it('computes the prefecture of a line', async () => {
     expect(await getPrefectures(lineString([SHINJUKU, YOYOGI]))).toEqual([TOKYO]);
     expect(await getPrefectures(lineString([SHINJUKU, CHICHIBU]))).toEqual([TOKYO, SAITAMA].sort());
     expect(await getPrefectures(lineString([SHINJUKU, SHIZUOKA]))).toEqual([TOKYO, KANAGAWA, SHIZUOKA_KEN].sort());
+
+    // Works with geometries as well as lines
+    expect(await getPrefectures(lineString([SHINJUKU, YOYOGI]).geometry)).toEqual([TOKYO]);
 });
