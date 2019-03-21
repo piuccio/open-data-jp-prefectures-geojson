@@ -39,9 +39,20 @@ Note that `getPrefectures` returns an array of Japanese prefectures.
 Single points fully contained inside a prefecture will only have one value.
 Single points right at the border or lines crossing multiple prefectures will have multiple values.
 
+If you're sure your `LineString`s are short and don't overlap multiple prefectures, you can pass the option `skipIntersect` to speed up resolution.
+
+```js
+await getPrefectures(line, { skipIntersect: true });
+```
+
+The default behaviour (`skipIntersect: false`) checks that the line crosses any prefecture at any point, so for instance if you're checking a straight line from Hokkaido to Tokyo, you'll get all the prefectures inbetween, but if you know your lines are small (for instance local streets, or railway station platforms) you can pass `skipIntersect: false` to only check the prefectures of the edges inside the line (for a straight line it'll be start and end, for more complex lines it's where the lines bend).
+
+
 
 ## Development
 
 1. Clone the repo
 1. Download the source zip file into `input/`
 1. Run `./setup.sh` to generate the output geojson file
+
+If you want to generate a smaller GeoJSON file at lower resolution, adjust the `-simplify interval=5` value inside `./setup.sh`

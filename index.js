@@ -6,7 +6,7 @@ const { prefectureCode } = require('./lib/prefectures');
 
 let PREFECTURES = null;
 
-exports.getPrefectures = async function (pointLineOrGeometry) {
+exports.getPrefectures = async function (pointLineOrGeometry, options = {}) {
     if (!PREFECTURES) {
         PREFECTURES = (await readInput()).features.map((pref) => ({
             code: prefectureCode(pref.properties.P),
@@ -17,7 +17,7 @@ exports.getPrefectures = async function (pointLineOrGeometry) {
     }
     const geometry = pointLineOrGeometry.geometry || pointLineOrGeometry;
     return PREFECTURES
-        .filter((pref) => hackyContains(pref.polygon, geometry))
+        .filter((pref) => hackyContains(pref.polygon, geometry, options))
         .map((_) => _.code);
 };
 
@@ -27,7 +27,7 @@ exports.getPrefectures = async function (pointLineOrGeometry) {
  * @param {Polygon|MultiPolygon} outside 
  * @param {Geometry} inside 
  */
-function hackyContains(outside, inside) {
+function hackyContains(outside, inside, options) {
     if (inside.type === 'Point') {
         // PointInPolygon works with MultiPolygons, Contains is broken
         return booleanPointInPolygon(inside, outside);
@@ -38,6 +38,7 @@ function hackyContains(outside, inside) {
             return found || booleanPointInPolygon(point(coordinates), outside);
         }, false);
         if (found) return found;
+        if (options.skipIntersect) return false;
         // There's still a chance the line intersects the outside polygon
         return lineIntersect(outside, inside).features.length > 0;
     }
