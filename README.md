@@ -55,4 +55,5 @@ The default behaviour (`skipIntersect: false`) checks that the line crosses any 
 1. Download the source zip file into `input/`
 1. Run `./setup.sh` to generate the output geojson file
 
-If you want to generate a smaller GeoJSON file at lower resolution, adjust the `-simplify interval=5` value inside `./setup.sh`
+If you want to generate a smaller GeoJSON file at lower resolution, call `./setup.sh 50`
+(`50` is going to be the simplification interval, defaults to `5`)
