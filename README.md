@@ -11,7 +11,7 @@ This module provides a single high definition GeoJSON file and some utility meth
 ## Source
 
 Source data is from the [National Land Information Division](http://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-N03-v2_3.html) which is a high resolution GeoJSON file containing all administrative areas.
-All features are merged by prefectures and the resulting file is simplified with a Visvalingam simplification keeping lines withing 5 meters of the original location.
+All features are merged by prefectures and the resulting file is simplified with a Visvalingam simplification keeping lines within 5 meters of the original location.
 
 
 ## Usage

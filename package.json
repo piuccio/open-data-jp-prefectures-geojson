@@ -7,7 +7,7 @@
     "test": "jest --coverage",
     "test:watch": "jest --watchAll",
     "posttest": "npm run lint",
-    "lint": "eslint --ignore-path .gitignore --cache --fix ."
+    "lint": "npx eslint --ignore-path .gitignore --cache --fix ."
   },
   "keywords": [],
   "author": "Fabio Crisci <fabio.crisci@gmail.com> (https://github.com/piuccio)",
@@ -17,9 +17,8 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "eslint": "5.15.3",
-    "jest": "24.5.0",
-    "mapshaper": "0.4.108"
+    "jest": "25.3.0",
+    "mapshaper": "0.4.163"
   },
   "nodemonConfig": {
     "ignore": [
