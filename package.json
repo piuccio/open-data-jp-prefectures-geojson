@@ -17,8 +17,8 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "jest": "25.3.0",
-    "mapshaper": "0.4.163"
+    "jest": "26.4.2",
+    "mapshaper": "0.5.20"
   },
   "nodemonConfig": {
     "ignore": [
